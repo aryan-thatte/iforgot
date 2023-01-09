@@ -10,10 +10,12 @@ export interface TaskProps {
 
 function App() {
   const [tasks, setTasks] = useState<[TaskProps] | any>([{title: "", details: "", complete: false}])
+  const [updateTasks, setUpdateTasks] = useState(true)
 
   useEffect(() => {
     fetchTasks()
-  }, [])
+    setUpdateTasks(false)
+  }, [updateTasks])
 
   async function fetchTasks() {
     const { data } = await supabase
@@ -22,17 +24,18 @@ function App() {
     setTasks(data)
     console.log("data: ", data)
   }
-  
+
   async function createTask(task: TaskProps) {
     await supabase
       .from('tasks')
       .insert([{title: task.title, details: task.details, complete: task.complete}])
       .single()
+    setTasks({title: "", details: "", complete: false})
     fetchTasks()
   }
 
   return (
-    <div className="App">
+    <div className="App ">
       <button onClick={() => createTask({title: "test title", details: "test details", complete: false})}/>
     </div>
   );
