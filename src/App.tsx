@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { supabase } from './client';
+import Button from '@mui/material/Button'
 
 export interface TaskProps {
   title: string
@@ -35,8 +36,8 @@ function App() {
   }
 
   return (
-    <div className="App ">
-      <button onClick={() => createTask({title: "test title", details: "test details", complete: false})}/>
+    <div className="App">
+      <Button onClick={() => createTask({title: "test title", details: "test details", complete: false})}>ADD TASK</Button>
     </div>
   );
 }
