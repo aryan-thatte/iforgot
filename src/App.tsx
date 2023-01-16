@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react';
-import './App.css';
-import { supabase } from './client';
+import { useEffect, useState } from 'react'
+import './App.css'
+import { supabase } from './client'
 import Button from '@mui/material/Button'
+import { MainAppView } from './components/MainAppView/MainAppView'
 
 export interface TaskProps {
   title: string
@@ -23,7 +24,7 @@ function App() {
       .from('tasks')
       .select()
     setTasks(data)
-    console.log("data: ", data)
+    if (data) console.log("data: ", data)
   }
 
   async function createTask(task: TaskProps) {
@@ -37,7 +38,8 @@ function App() {
 
   return (
     <div className="App">
-      <Button onClick={() => createTask({title: "test title", details: "test details", complete: false})}>ADD TASK</Button>
+      {/* <Button onClick={() => createTask({title: "test title", details: "test details", complete: false})}>ADD TASK</Button> */}
+      <MainAppView />
     </div>
   );
 }
